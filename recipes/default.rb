@@ -73,7 +73,7 @@ file "/etc/php5/apache2/conf.d/upload_max_filesize.ini" do
     group "root"
     mode "0644"
     action :create
-    content "upload_max_filesize = 10M\npost_max_size = 10M\n"
+    content "upload_max_filesize = 128M\npost_max_size = 128M\n"
     notifies :restart, "service[apache2]"
 end
 
@@ -82,13 +82,13 @@ file "/etc/php5/apache2/conf.d/max_execution_time.ini" do
     group "root"
     mode "0644"
     action :create
-    content "max_execution_time = 240\n"
+    content "max_execution_time = 600\n"
     notifies :restart, "service[apache2]"
 end
 
 # create TYPO3 site / web app
 Chef::Log.info "Setting up TYPO3 site \"#{node['typo3']['site_name']}\""
-web_app node['typo3']['site_name'] do 
+web_app node['typo3']['site_name'] do
   template "typo3-web_app.conf.erb"
   docroot site_docroot
   server_name node['typo3']['server_name']
