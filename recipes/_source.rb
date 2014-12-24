@@ -32,7 +32,7 @@ directory "#{site_docroot}" do
 end
 
 # download TYPO3 source
-unless File.directory? typo3_source_directory 
+unless File.directory? typo3_source_directory
   execute "Download TYPO3 source, version #{node['typo3']['version']}" do
     cwd "#{site_docroot}"
     command "wget http://get.typo3.org/#{node['typo3']['version']} -O typo3.tgz"
@@ -57,7 +57,6 @@ link "#{site_docroot}/typo3_src" do
 end
 
 %w{
-  t3lib
   typo3
   index.php
 }.each do |link_target|
