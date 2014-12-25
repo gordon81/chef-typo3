@@ -17,12 +17,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+mysql_service 'default' do
+  port '3306'
+  version '5.5'
+  initial_root_password 'change me'
+  action [:create, :start]
+end
+mysql_client 'default' do
+  action :create
+end
 
 # define mysql connection parameters
 mysql_connection_info = {
-  :host     => "localhost", 
-  :username => "root", 
+  :host     => "localhost",
+  :username => "root",
   :password => node['mysql']['server_root_password']
 }
 
